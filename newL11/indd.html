@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style lang="less">
+    html{
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background: black
+    }
+    .container{
+        display: grid;
+        margin: 0 auto;
+         width: 90%;
+         /* width: 100vmin;
+         height: 100vmin; */
+         margin-top: 1em;
+         color: aliceblue;
+         grid-template-columns: repeat(3,1fr);
+         gap: 20px;
+         text-align: center;
+    }
+    .card{
+        aspect-ratio: 4/3;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        /* border: 20px solid #fff;
+        border-image:url(./1.png) 50 round; */
+    }
+    .card .inner{
+        position: absolute;
+        background: #222;
+        inset: 2px;
+        border-radius: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+    }
+    .card::before{
+        content: '';
+        position: absolute;
+        z-index: 2;
+        inset: 0;
+        top: 0;
+        left: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+        closest-side circle,
+        rgba(255, 255, 255, 0.6) 0%,
+        transparent
+        );
+        transform: translate(var(--x,-1000px),var(--y,1000px));
+        
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="inner"><a href="https://www.douyu.com/48699" title="直播" target="1"><span>衣锦夜行</span></a></div>
+        </div>
+        <div class="card">
+            <div class="inner"><a href="https://www.bilibili.com/" title="视频" target="1"><span>B站</span></a></div>
+        </div>
+        <div class="card">
+            <div class="inner"><a href="https://www.douyu.com/topic/2023XLS?rid=3168536&dyshid=586a8a4-4d5b964490585ae3947f6d2600051601" title="直播" target="1"><span>小叮当</span></a></div>
+        </div>
+        <div class="card">
+            <div class="inner">asdhgjagsgdsagdjagdsajhdgahjsgdsadas</div>
+        </div>
+        <div class="card">
+            <div class="inner">asdhgjagsgdsagdjagdsajhdgahjsgdsadas</div>
+        </div>
+        <div class="card">
+            <div class="inner">asdhgjagsgdsagdjagdsajhdgahjsgdsadas</div>
+        </div>
+    </div>
+</body>
+<script>
+    const container=document.querySelector(".container")
+    const cards=document.querySelectorAll(".card")
+    container.onmousemove = function (e) {
+        for (const card of cards) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            card.style.setProperty('--x',`${x}px`);
+            card.style.setProperty('--y',`${y}px`);
+        }
+    }
+</script>
+</html>
